@@ -27,6 +27,7 @@ async function run() {
     // Send a ping to confirm a successful connection
     const userCollection = client.db("furnFusion").collection("users");
     const cartCollection=client.db("furnFusion").collection("carts")
+    const productCollection = client.db("furnFusion").collection("product");
 
     app.post("/users", async (req, res) => {
         const user = req.body;
@@ -45,6 +46,11 @@ async function run() {
         const result = await userCollection.find().toArray();
         res.send(result);
       });
+
+      app.get("/product",async(req,res)=>{
+        const result= await productCollection.find().toArray()
+        res.send(result)
+      })
 
       app.post("/carts", async (req, res) => {
         const products = req.body;
